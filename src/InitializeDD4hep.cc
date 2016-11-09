@@ -2,12 +2,17 @@
 
 #include "DD4hep/LCDD.h"
 
+#include "UTIL/ILDConf.h"
+
 using namespace marlin ;
 
 InitializeDD4hep aInitializeDD4hep ;
 
 
-InitializeDD4hep::InitializeDD4hep() : Processor("InitializeDD4hep") {
+InitializeDD4hep::InitializeDD4hep() : Processor("InitializeDD4hep"),
+				       _dd4hepFileName(""),
+				       _encodingStringParameter("")
+{
   
   // modify processor description
   _description = "InitializeDD4hep reads a compact xml file and initializes the DD4hep::LCDD object" ;
@@ -17,6 +22,13 @@ InitializeDD4hep::InitializeDD4hep() : Processor("InitializeDD4hep") {
 			      _dd4hepFileName ,
 			      std::string("dd4hep_compact.xml")
 			      );
+
+  registerProcessorParameter( "EncodingStringParameter" ,
+			      "Name of the LCDD parameter that contains the Tracker CellID Encoding string",
+			      _encodingStringParameter,
+			      std::string("")
+			      );
+
 }
 
 void InitializeDD4hep::init() { 
@@ -33,6 +45,14 @@ void InitializeDD4hep::init() {
   
   streamlog_out( MESSAGE )  << " ---- instantiated  geometry for detector " << lcdd.header().name()  << std::endl 
 			    << " -------------------------------------" << std::endl ;
+
+
+  if ( _encodingStringParameter != "" ){
+    streamlog_out(MESSAGE) << "Changing encoding string to " << lcdd.constantAsString( _encodingStringParameter )
+			   << std::endl;
+    ILDCellID0::encoder_string = lcdd.constantAsString( _encodingStringParameter );
+
+  }
 
 }
 
