@@ -10,8 +10,8 @@ PROJECT( MarlinDD4hep )
 
 # project version
 SET( ${PROJECT_NAME}_VERSION_MAJOR 0 )
-SET( ${PROJECT_NAME}_VERSION_MINOR 3 )
-SET( ${PROJECT_NAME}_VERSION_PATCH 0 )
+SET( ${PROJECT_NAME}_VERSION_MINOR 2 )
+SET( ${PROJECT_NAME}_VERSION_PATCH 2 )
 
 
 ### DEPENDENCIES ############################################################
