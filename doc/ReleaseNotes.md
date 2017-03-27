@@ -1,3 +1,5 @@
+# v00-02-02
+
 A.Sailer
 - ignore warnings from external packages
 - add parameter "EncodingStringParameter", alternate spelling of "EncodingStringParameterName" for compatibility, 
